@@ -1,7 +1,7 @@
 ## Dining Philosophers
 
 # - Project Overview
-    This project tackles the Dining Philosophers problem, a classic exercise in concurrency and synchronization, using threads and mutexes for the mandatory part, and processes and semaphores for the bonus part. It helps develop skills in multithreading, process management, and handling race conditions.
+This project tackles the Dining Philosophers problem, a classic exercise in concurrency and synchronization, using threads and mutexes for the mandatory part, and processes and semaphores for the bonus part. It helps develop skills in multithreading, process management, and handling race conditions.
 
 # - Problem Description
 - Philosophers sit around a table, alternating between eating, thinking, and sleeping.
