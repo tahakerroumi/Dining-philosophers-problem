@@ -14,6 +14,6 @@ This project tackles the Dining Philosophers problem, a classic exercise in conc
 - Each philosopher is a thread and forks are shared resources, protected by mutexes.
 - Input: number of philosophers, time limits (to eat, sleep, or die), and an optional stop condition (number of meals).
 
-# Bonus Part
+# - Bonus Part
 - Implemented with processes and semaphores.
 - Philosophers are processes, and the number of available forks is controlled by a semaphore.
