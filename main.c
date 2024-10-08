@@ -6,25 +6,33 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 12:28:08 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/10/08 15:09:50 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:03:43 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	check_num(char *str)
+int	ft_atoi(const char *nptr)
 {
-	int	i;
+	int		i;
+	size_t	res;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '0' || str[i] == '+')
+	res = 0;
+	while ((nptr[i] == 32) || (nptr[i] >= 9 && nptr[i] <= 13) \
+	|| (nptr[i] == '+') || (nptr[i] == '0'))
 		i++;
-	if (ft_strlen(str + i) > ft_strlen("2147483647"))
+	while (ft_isdigit(nptr[i]))
 	{
-		ft_putstr_fd("Wrong input!\n" ,2);
-		return (1);
+		res = res * 10 + (nptr[i] - '0');
+		if (res > INT_MAX)
+		{
+			ft_putstr_fd("Wrong input!\n" ,2);
+			return (-1);
+		}
+		i++;
 	}
-	return (0);
+	return (res);
 }
 
 int parse(int ac, char **av)
@@ -33,11 +41,11 @@ int parse(int ac, char **av)
 
 	i = 1;
 	if (check_args(ac, av))
-		return (1);
+		return (-1);
 	while (av[i])
 	{
-		if (check_num(av[i]))
-			return (1);
+		if (ft_atoi(av[i]) == -1)
+			return (-1);
 		i++;
 	}
 	return (0);
@@ -45,7 +53,7 @@ int parse(int ac, char **av)
 
 int main(int ac, char **av)
 {
-    if (parse(ac, av))
+    if (parse(ac, av) == -1)
 		return (1);
 	return (0);
 }
