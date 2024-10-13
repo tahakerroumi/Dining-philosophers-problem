@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/10/08 15:27:36 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/10/10 02:54:48 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 
 typedef struct	s_data
 {
-    int		nop;
-	int		ttd;
-	int		tte;
-	int		tts;
-	int		nom;
+	int		philos_nbr; /*number of philos*/
+	int		die_time; /*time to die*/
+	int		eat_time; /*time to eat*/
+	int		sleep_time; /*time to sleep*/
+	int		meals_nbr; /*number of meals*/
+	
 }				t_data;
 
 /*parsing*/
