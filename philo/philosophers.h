@@ -15,22 +15,43 @@
 
 #include <unistd.h>
 #include <limits.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <sys/time.h>
 
 typedef struct	s_data
 {
-	int		philos_nbr; /*number of philos*/
-	int		die_time; /*time to die*/
-	int		eat_time; /*time to eat*/
-	int		sleep_time; /*time to sleep*/
-	int		meals_nbr; /*number of meals*/
-	
+	int				philos_nbr;
+	int				die_time;
+	int				eat_time;
+	int				sleep_time;
+	int				meals_nbr;
+	size_t			start_time;
+	size_t			current_time;
+	pthread_mutex_t	*fork;
 }				t_data;
+ 
+typedef struct s_philo
+{
+	int				philo_id;
+	int				times_eaten;
+	size_t			last_meal;
+	pthread_t		thread_id;
+	pthread_mutex_t	*l_fork_id;
+	pthread_mutex_t	*r_fork_id;
+	t_data			*data;
+}				t_philo;
+
 
 /*parsing*/
+int		parse(int ac, char **av);
+int		ft_myatoi(const char *nptr);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_isdigit(int c);
 int		wrong_input(const char *nptr);
 int		check_args(int ac, char **av);
-size_t	ft_strlen(const char *s);
+t_data	*initialisation(int ac, char **av);
 
 #endif
