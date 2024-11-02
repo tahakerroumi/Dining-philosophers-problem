@@ -12,26 +12,41 @@
 
 #include "philosophers.h"
 
-void	philo_init(t_data *data)
+void	philos_init(t_philo *philo, t_data *data)
 {
 	int	i;
 
 	i = -1;
 	while (++i < data->philos_nbr)
 	{
-		data->philo[i].philo_id = i;
-		data->philo[i].
+		philo[i].data = data;
+		philo[i].philo_id = i + 1;
+		philo[i].times_eaten = 0;
+		philo[i].l_fork_id = philo[(i + 1) % data->philos_nbr].r_fork_id;
 	}
-
 }
 
-t_data	*initialisation(int ac, char **av)
+int	fork_init(t_philo *philo, t_data *data)
 {
-	t_data *data;
+	int	i;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
+	i = -1;
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->philos_nbr);
+	if (!data->fork)
+		return (1);
+	while (++i < data->philos_nbr)
+	{
+		philo[i].r_fork_id = malloc(sizeof(pthread_mutex_t));
+		if (!philo[i].r_fork_id || pthread_mutex_init(philo[i].r_fork_id, NULL))
+			return (1);
+	}
+	return (0);
+}
+
+t_philo	*initialisation(t_data *data, int ac, char **av)
+{
+	t_philo *philo;
+
 	data->philos_nbr = ft_myatoi(av[1]);
 	data->die_time = ft_myatoi(av[2]);
 	data->eat_time = ft_myatoi(av[3]);
@@ -40,9 +55,8 @@ t_data	*initialisation(int ac, char **av)
 		data->meals_nbr = ft_myatoi(av[5]);
 	else
 		data->meals_nbr = -1;
-	data->philo = (t_philo *)malloc(sizeof(t_philo) * data->philos_nbr);
-	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->philos_nbr);
-	if (!data->philo || !data->fork)
-		return (NULL);
-	philo_init(data);
+	philo = malloc(sizeof(t_philo) * data->philos_nbr);
+	if (!philo || fork_init(philo, data))
+		return (1);
+	philos_init(philo, data);
 }

@@ -52,6 +52,6 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_isdigit(int c);
 int		wrong_input(const char *nptr);
 int		check_args(int ac, char **av);
-t_data	*initialisation(int ac, char **av);
+t_philo	*initialisation(t_data *data, int ac, char **av);
 
 #endif

@@ -15,9 +15,12 @@
 int main(int ac, char **av)
 {
 	t_data	data;
+	t_philo	*philo;
 
     if (parse(ac, av) == -1)
 		return (1);
-	data = initialisation(ac, av);
+	philo = initialisation(&data, ac, av);
+	if (!philo)
+		// free data and stuuf
 	return (0);
 }
