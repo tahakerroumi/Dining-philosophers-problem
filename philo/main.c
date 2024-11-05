@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ta7ino <ta7ino@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 12:28:08 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/10/08 16:03:43 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:27:58 by ta7ino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int main(int ac, char **av)
 	philo = initialisation(&data, ac, av);
 	if (!philo)
 		// free data and stuuf
+	global_routine(&data, philo);
 	return (0);
 }

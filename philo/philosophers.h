@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ta7ino <ta7ino@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/10/10 02:54:48 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:27:31 by ta7ino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int		ft_isdigit(int c);
 int		wrong_input(const char *nptr);
 int		check_args(int ac, char **av);
 t_philo	*initialisation(t_data *data, int ac, char **av);
+void    global_routine(t_data *data, t_philo *philo);
 
 #endif
