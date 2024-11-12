@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:20:59 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/10/08 14:47:33 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/12 22:09:41 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,24 @@ int check_args(int ac, char **av)
 		i++;
 	}
 	return (0);
+}
+
+void	free_data(t_philo *philo, t_data *data)
+{
+	int i;
+
+	i = -1;
+	if (!philo)
+		return ;
+	while (++i < data->philos_nbr)
+		if (philo[i].r_fork_id != NULL)
+			free(philo[i].r_fork_id);
+	if (philo[0].write_lock)
+		free(philo[0].write_lock);
+	if (philo[0].meal_lock)
+		free(philo[0].meal_lock);
+	if (philo[0].dead_lock)
+		free(philo[0].dead_lock);
+	if (philo)
+		free (philo);
 }
