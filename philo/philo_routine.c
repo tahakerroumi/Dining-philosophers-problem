@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:07:47 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/14 01:53:53 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/15 10:37:33 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void    sleeping(t_philo *philo)
 {
-    // print is sleeping
+    message_update("is sleeping", philo);
     ft_myusleep(philo->data->sleep_time);
+    message_update("is thinking", philo);
 }
 
 void    pick_fork(t_philo *philo)
 {
     pthread_mutex_lock(philo->r_fork_id);
-    printf("");
+    message_update("has takes a fork", philo);
     pthread_mutex_unlock(philo->r_fork_id);
+    pthread_mutex_lock(philo->l_fork_id);
+    message_update("has takes a fork", philo);
+    pthread_mutex_unlock(philo->l_fork_id);
 }
 
 void    priority_waiting(t_philo *philo)
@@ -38,10 +42,14 @@ void    *philo_routine(void *data)
     t_philo *philo;
 
     philo = (t_philo *)data;
+    philo->data->current_time = current_moment();
     priority_waiting(philo);
-    // lock forks
-    // eat
-    // sleep
+    while (1)
+    {
+        pick_fork(philo);
+        dining(philo);
+        sleeping(philo);
+    }
 }
 
 void    global_routine(t_philo *philo)

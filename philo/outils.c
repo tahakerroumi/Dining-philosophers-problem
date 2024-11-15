@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:14:05 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/14 01:58:58 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/15 10:21:35 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void  ft_myusleep(int	moment)
 	while (current_moment() - now < moment)
 		usleep(777);
 }
+
 void	message_update(char *message, t_philo *philo)
 {
 	pthread_mutex_lock(philo->write_lock);
-	printf("[%zu]", current_moment() - );
+	printf("[%zu ms] %d %s", (current_moment() - philo->data->current_time), philo->philo_id, message);
+	pthread_mutex_unlock(philo->write_lock);
 }

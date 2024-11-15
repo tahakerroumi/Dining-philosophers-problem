@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/14 02:06:38 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/15 10:22:46 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ int		mutex_init(t_philo *philo);
 void	free_data(t_philo *philo, t_data *data);
 void  ft_myusleep(int	moment);
 size_t  current_moment();
+void	message_update(char *message, t_philo *philo);
 
 #endif

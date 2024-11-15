@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:40 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/14 02:06:44 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/15 10:13:35 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	philos_init(t_philo *philo, t_data *data)
 		philo[i].philo_id = i + 1;
 		philo[i].times_eaten = 0;
 		philo[i].l_fork_id = philo[(i + 1) % philo->data->philos_nbr].r_fork_id;
-		philo[i].data->current_time = current_moment();
 	}
 	if (mutex_init(philo))
 		return (1);
