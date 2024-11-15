@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/15 11:40:59 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:23:32 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct	s_data
 	int				eat_time;
 	int				sleep_time;
 	int				meals_nbr;
-	size_t			current_time;
+	size_t			start_time;
+	int				dead_flag;
 }				t_data;
 
 typedef struct s_philo
@@ -44,7 +45,7 @@ typedef struct s_philo
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*dead_lock;
 	int				*dead;
-	
+
 	t_data			*data;
 }				t_philo;
 
