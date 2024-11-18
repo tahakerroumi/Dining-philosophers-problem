@@ -2,7 +2,7 @@ FLAGS = -Wall -Wextra - Werror
 CC = cc
 NAME = philo
 
-SRC = main.c outils.c parsing.c philo_health.c philo_init.c philo_routine.c tools.c
+SRC = main.c parsing.c philo_init.c philo_routine.c tools.c monitor.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

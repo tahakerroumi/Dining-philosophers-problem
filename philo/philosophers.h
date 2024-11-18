@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/17 19:27:43 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/18 04:27:20 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <sys/time.h>
-
 
 struct s_philo;  
 
@@ -58,14 +57,10 @@ typedef struct s_philo
 
 /*parsing*/
 int		parse(int ac, char **av);
-int		ft_myatoi(const char *nptr);
-void	ft_putstr_fd(char *s, int fd);
 int		ft_isdigit(int c);
-int		wrong_input(const char *nptr);
-int		check_args(int ac, char **av);
+int		ft_myatoi(const char *nptr);
 /*tools*/ 
 t_philo	*initialisation(t_data *data, int ac, char **av);
-void    global_routine(t_data *data);
 int		philos_init(t_philo *philo, t_data *data);
 void	mutex_init(t_data *data);
 void 	ft_myusleep(int	moment);
@@ -76,6 +71,9 @@ void    pick_fork(t_philo *philo);
 void    dining(t_philo *philo);
 void    sleeping(t_philo *philo);
 void	free_data(t_data *data);
-int existing(t_philo *philo);
+int		existing(t_philo *philo);
+int		died_checker(t_philo *philo);
+int		died(t_philo *philo);
+void	*monitor_work(void	*data);
 
 #endif
