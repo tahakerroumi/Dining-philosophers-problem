@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 00:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/18 00:28:06 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:06:06 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	died_checker(t_philo *philo)
 {
+	size_t	time;
+
 	pthread_mutex_lock(philo->meal_lock);
-	if (((current_moment() - philo->last_meal) >= philo->data->die_time) && (philo->eating = 0))
+	time = current_moment() - philo->last_meal;
+	if ((time >= philo->data->die_time) && (philo->eating == 0))
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		return (1);		
@@ -29,7 +32,7 @@ int	died(t_philo *philo)
 	int	i;
 
 	i = -1;
-	while (++i < philo[0].data->philos_nbr)
+	while (++i < philo->data->philos_nbr)
 	{
 		if (died_checker(&philo[i]))
 		{
@@ -74,7 +77,9 @@ void	*monitor_work(void	*data)
 
 	philo = (t_philo *)data;
 	while (1)
+	{
 		if (died(philo) == 1 || all_ate(philo) == 1)
 			break ;
+	}
 	return (data);
 }

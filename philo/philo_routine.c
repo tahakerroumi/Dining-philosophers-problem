@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:07:47 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/18 04:55:19 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:42:05 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    sleeping(t_philo *philo)
 int existing(t_philo *philo)
 {
     pthread_mutex_lock(philo->dead_lock);
-    if (*philo->dead == 1)
+    if (*(philo->dead) == 1)
     {
         pthread_mutex_unlock(philo->dead_lock);
         return (0);
@@ -64,7 +64,7 @@ void    *philo_routine(void *data)
     t_philo *philo;
 
     philo = (t_philo *)data;
-    if (philo->philo_id & 1 == 1)
+    if (philo->philo_id % 2 == 0)
         ft_myusleep(1);
     while (existing(philo) != 0)
     {
