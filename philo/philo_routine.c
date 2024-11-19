@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:07:47 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/18 11:42:05 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:50:40 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    pick_fork(t_philo *philo)
     message_update("has taken a fork", philo);
     if (philo->data->philos_nbr == 1)
     {
-        ft_myusleep(philo->data->die_time);
+        ft_myusleep(philo->data->die_time, philo);
         pthread_mutex_unlock(philo->r_fork_id);
         return ;
     }
@@ -34,7 +34,7 @@ void    dining(t_philo *philo)
     philo->last_meal = current_moment();
     philo->times_eaten++;
     pthread_mutex_unlock(philo->meal_lock);
-    ft_myusleep(philo->data->eat_time);
+    ft_myusleep(philo->data->eat_time, philo);
     philo->eating = 0;
     pthread_mutex_unlock(philo->r_fork_id);
     pthread_mutex_unlock(philo->l_fork_id);
@@ -43,7 +43,7 @@ void    dining(t_philo *philo)
 void    sleeping(t_philo *philo)
 {
     message_update("is sleeping", philo);
-    ft_myusleep(philo->data->sleep_time);
+    ft_myusleep(philo->data->sleep_time, philo);
     message_update("is thinking", philo);
 }
 
@@ -65,8 +65,8 @@ void    *philo_routine(void *data)
 
     philo = (t_philo *)data;
     if (philo->philo_id % 2 == 0)
-        ft_myusleep(1);
-    while (existing(philo) != 0)
+        usleep(150);
+    while (existing(philo))
     {
         pick_fork(philo);
         dining(philo);

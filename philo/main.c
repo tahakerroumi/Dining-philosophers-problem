@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 12:28:08 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/18 11:42:42 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:51:51 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void    global_routine(t_data *data)
     i = -1;
     while (++i < data->philos_nbr)
        pthread_create(&data->philosophe[i].thread_id, NULL, &philo_routine, (void *)&data->philosophe[i]);
+	pthread_join(monitor, NULL);
 	i = -1;
 	while (++i < data->philos_nbr)
 		pthread_join(data->philosophe[i].thread_id, NULL);
-	pthread_join(monitor, NULL);
 }
 
 int main(int ac, char **av)

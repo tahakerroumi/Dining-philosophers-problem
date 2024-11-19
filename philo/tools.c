@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:20:59 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/17 23:39:59 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:53:23 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ size_t  current_moment()
 	return ((var.tv_sec * 1000) + (var.tv_usec / 1000));
 }
 
-void  ft_myusleep(int	moment)
+void  ft_myusleep(int	moment, t_philo *philo)
 {
     size_t  now;
 
     now = current_moment();
-	while ((current_moment() - now) < moment)
-		usleep(2);
+	while ((current_moment() - now) < moment && existing(philo))
+			usleep(250);
 	return ;
 }
 

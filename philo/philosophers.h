@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/18 04:27:20 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:42:50 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		ft_myatoi(const char *nptr);
 t_philo	*initialisation(t_data *data, int ac, char **av);
 int		philos_init(t_philo *philo, t_data *data);
 void	mutex_init(t_data *data);
-void 	ft_myusleep(int	moment);
+void  ft_myusleep(int	moment, t_philo *philo);
 size_t  current_moment();
 void	message_update(char *message, t_philo *philo);
 void    *philo_routine(void *data);
