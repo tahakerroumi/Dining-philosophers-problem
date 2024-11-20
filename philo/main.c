@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 12:28:08 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/20 02:47:09 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:14:46 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int ac, char **av)
 	if (parse(ac, av) == -1)
 		return (1);
 	if (philos_init(initialisation(&data, ac, av), &data))
-		return (1);
+		return (free_data(&data), 1);
 	global_routine(&data);
 	free_data(&data);
 	free(data.philosophe);

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:20:59 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/20 02:04:04 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:19:04 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_myusleep(size_t moment, t_philo *philo)
 	size_t	now;
 
 	now = current_moment();
-	while (((current_moment() - now) < moment) && existing(philo))
-		usleep(100);
+	while ((current_moment() - now) < moment && existing(philo))
+		usleep(50);
 	return ;
 }
 
