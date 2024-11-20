@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:40 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/17 17:58:58 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/20 03:16:23 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,19 @@ int	philos_init(t_philo *philo, t_data *data)
 		philo[i].dead = &data->dead_flag;
 		philo[i].dead_lock = &data->dead_lock;
 		philo[i].write_lock = &data->write_lock;
-		philo[i].meal_lock = &data->meal_lock; 
+		philo[i].meal_lock = &data->meal_lock;
 		philo[i].last_meal = current_moment();
 		philo[i].start_time = current_moment();
-		philo[i].l_fork_id = philo[(i + 1) % philo->data->philos_nbr].r_fork_id;
+		if (i ==  data->philos_nbr - 1)
+		{
+			philo[i].r_fork_id = &data->forks[(i + 1) % data->philos_nbr];
+			philo[i].l_fork_id = &data->forks[i];
+		}
+		else
+		{
+			philo[i].r_fork_id = &data->forks[i];
+			philo[i].l_fork_id = &data->forks[(i + 1) % data->philos_nbr];
+		}
 	}
 	return (0);
 }
@@ -42,16 +51,15 @@ void	fork_init(t_philo *philo, t_data *data)
 
 	if (!philo)
 		free_data(data);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->philos_nbr);
+	if (!data->forks)
+	{
+		free(philo);
+		return ;
+	}
 	i = -1;
 	while (++i < data->philos_nbr)
-	{
-		philo[i].r_fork_id = malloc(sizeof(pthread_mutex_t));
-		if (!philo[i].r_fork_id || pthread_mutex_init(philo[i].r_fork_id, NULL))
-		{
-			free_data(data);
-			free(philo);
-		}
-	}
+		pthread_mutex_init(&data->forks[i], NULL);
 }
 
 void	mutex_init(t_data *data)

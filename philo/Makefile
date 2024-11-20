@@ -1,4 +1,4 @@
-FLAGS = -Wall -Wextra - Werror -pthread -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -lpthread
 CC = cc
 NAME = philo
 
@@ -20,4 +20,3 @@ fclean: clean
 	rm -Rf $(NAME)
 
 re: fclean all
-.SECONDARY: $(OBJ)

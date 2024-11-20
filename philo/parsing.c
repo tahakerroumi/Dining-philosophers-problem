@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 18:09:22 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/18 00:56:00 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/20 00:34:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_putstr_fd(char *s, int fd)
 
 int	wrong_input(const char *nptr)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (nptr[i] == ' ')
@@ -39,7 +39,7 @@ int	wrong_input(const char *nptr)
 		i++;
 	if (nptr[i] != '\0')
 	{
-		ft_putstr_fd("Wrong input!\n" ,2);
+		ft_putstr_fd("Wrong input!\n", 2);
 		return (1);
 	}
 	return (0);
@@ -52,15 +52,15 @@ int	ft_myatoi(const char *nptr)
 
 	i = 0;
 	res = 0;
-	while ((nptr[i] == 32) || (nptr[i] >= 9 && nptr[i] <= 13) \
-	|| (nptr[i] == '+') || (nptr[i] == '0'))
+	while ((nptr[i] == 32) || (nptr[i] >= 9 && nptr[i] <= 13)
+		|| (nptr[i] == '+') || (nptr[i] == '0'))
 		i++;
 	while (ft_isdigit(nptr[i]))
 	{
 		res = res * 10 + (nptr[i] - '0');
 		if (res > INT_MAX)
 		{
-			ft_putstr_fd("Wrong input!\n" ,2);
+			ft_putstr_fd("Wrong input!\n", 2);
 			return (-1);
 		}
 		i++;
@@ -68,13 +68,13 @@ int	ft_myatoi(const char *nptr)
 	return (res);
 }
 
-int check_args(int ac, char **av)
+int	check_args(int ac, char **av)
 {
-	int i;
+	int	i;
 
 	if (ac != 5 && ac != 6)
 	{
-		ft_putstr_fd("Wrong input!\n" ,2);
+		ft_putstr_fd("Wrong input!\n", 2);
 		return (1);
 	}
 	i = 1;
@@ -87,7 +87,7 @@ int check_args(int ac, char **av)
 	return (0);
 }
 
-int parse(int ac, char **av)
+int	parse(int ac, char **av)
 {
 	int	i;
 

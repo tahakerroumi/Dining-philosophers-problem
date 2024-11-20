@@ -6,24 +6,24 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/19 17:42:50 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/20 01:25:58 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include <unistd.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <sys/time.h>
+# include <limits.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-struct s_philo;  
+struct	s_philo;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int				philos_nbr;
 	int				die_time;
@@ -35,7 +35,8 @@ typedef struct	s_data
 	pthread_mutex_t	dead_lock;
 	struct s_philo	*philosophe;
 	int				dead_flag;
-}				t_data;
+	pthread_mutex_t	*forks;
+}					t_data;
 
 typedef struct s_philo
 {
@@ -53,27 +54,27 @@ typedef struct s_philo
 	int				*dead;
 
 	t_data			*data;
-}				t_philo;
+}					t_philo;
 
 /*parsing*/
-int		parse(int ac, char **av);
-int		ft_isdigit(int c);
-int		ft_myatoi(const char *nptr);
-/*tools*/ 
-t_philo	*initialisation(t_data *data, int ac, char **av);
-int		philos_init(t_philo *philo, t_data *data);
-void	mutex_init(t_data *data);
-void  ft_myusleep(int	moment, t_philo *philo);
-size_t  current_moment();
-void	message_update(char *message, t_philo *philo);
-void    *philo_routine(void *data);
-void    pick_fork(t_philo *philo);
-void    dining(t_philo *philo);
-void    sleeping(t_philo *philo);
-void	free_data(t_data *data);
-int		existing(t_philo *philo);
-int		died_checker(t_philo *philo);
-int		died(t_philo *philo);
-void	*monitor_work(void	*data);
+int					parse(int ac, char **av);
+int					ft_isdigit(int c);
+int					ft_myatoi(const char *nptr);
+/*tools*/
+t_philo				*initialisation(t_data *data, int ac, char **av);
+int					philos_init(t_philo *philo, t_data *data);
+void				mutex_init(t_data *data);
+void				ft_myusleep(size_t moment, t_philo *philo);
+size_t				current_moment(void);
+void				message_update(char *message, t_philo *philo);
+void				*philo_routine(void *data);
+void				pick_fork(t_philo *philo);
+void				dining(t_philo *philo);
+void				sleeping(t_philo *philo);
+void				free_data(t_data *data);
+int					existing(t_philo *philo);
+int					died_checker(t_philo *philo);
+int					died(t_philo *philo);
+void				*monitor_work(void *data);
 
 #endif
