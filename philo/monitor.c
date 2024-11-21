@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 00:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/20 21:13:03 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:54:05 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,4 @@ int	all_ate(t_philo *philo)
 		return (1);
 	}
 	return (0);
-}
-
-void	*monitor_work(void *data)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)data;
-	while (1)
-	{
-		if (died(philo) == 1 || all_ate(philo) == 1)
-			break ;
-	}
-	return (data);
 }

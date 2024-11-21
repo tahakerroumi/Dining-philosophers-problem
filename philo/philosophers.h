@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/20 01:25:58 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:51:58 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void				ft_myusleep(size_t moment, t_philo *philo);
 size_t				current_moment(void);
 void				message_update(char *message, t_philo *philo);
 void				*philo_routine(void *data);
-void				pick_fork(t_philo *philo);
+// void				pick_fork(t_philo *philo);
 void				dining(t_philo *philo);
-void				sleeping(t_philo *philo);
+// void				sleeping(t_philo *philo);
 void				free_data(t_data *data);
 int					existing(t_philo *philo);
 int					died_checker(t_philo *philo);
 int					died(t_philo *philo);
-void				*monitor_work(void *data);
+int					all_ate(t_philo *philo);
 
 #endif

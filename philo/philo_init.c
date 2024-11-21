@@ -6,31 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:40 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/20 21:08:09 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:32:54 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	fork_id_manager(t_philo *philo, t_data *data)
-{
-	int	i;
-
-	i = -1;	
-	while (++i < data->philos_nbr)
-	{
-		if (i ==  data->philos_nbr - 1)
-		{
-			philo[i].r_fork_id = &data->forks[(i + 1) % data->philos_nbr];
-			philo[i].l_fork_id = &data->forks[i];
-		}
-		else
-		{
-			philo[i].r_fork_id = &data->forks[i];
-			philo[i].l_fork_id = &data->forks[(i + 1) % data->philos_nbr];
-		}
-	}
-}
 
 int	philos_init(t_philo *philo, t_data *data)
 {
@@ -51,13 +31,17 @@ int	philos_init(t_philo *philo, t_data *data)
 		philo[i].meal_lock = &data->meal_lock;
 		philo[i].last_meal = current_moment();
 		philo[i].start_time = current_moment();
-		philo[i].l_fork_id = &data->forks[i];
-		if (i == 0)
-			philo[i].r_fork_id = &data->forks[i + 1];
+		if (i ==  data->philos_nbr - 1)
+		{
+			philo[i].r_fork_id = &data->forks[(i + 1) % data->philos_nbr];
+			philo[i].l_fork_id = &data->forks[i];
+		}
 		else
-			philo[i].r_fork_id = &data->forks[i - 1];
+		{
+			philo[i].r_fork_id = &data->forks[i];
+			philo[i].l_fork_id = &data->forks[(i + 1) % data->philos_nbr];
+		}
 	}
-	// fork_id_manager(philo, data);
 	return (0);
 }
 
@@ -89,7 +73,7 @@ t_philo	*initialisation(t_data *data, int ac, char **av)
 {
 	t_philo	*philo;
 
-	data->philos_nbr = ft_myatoi(av[1]);
+	data->philos_nbr = atoi(av[1]);
 	data->die_time = ft_myatoi(av[2]);
 	data->eat_time = ft_myatoi(av[3]);
 	data->sleep_time = ft_myatoi(av[4]);
