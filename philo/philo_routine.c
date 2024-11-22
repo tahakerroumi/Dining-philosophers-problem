@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:07:47 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/22 03:38:10 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 04:13:26 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ void	dining(t_philo *philo)
 	pthread_mutex_lock(philo->second_fork);
 	message_update("has taken a fork", philo);
 	message_update("is eating", philo);
+	pthread_mutex_lock(philo->eat_m_nbr);
+	philo->times_eaten++;
+	pthread_mutex_unlock(philo->eat_m_nbr);
 	pthread_mutex_lock(philo->meal_lock);
 	philo->last_meal = current_moment();
 	pthread_mutex_unlock(philo->meal_lock);
 	ft_myusleep(philo->data->eat_time, philo);
 	pthread_mutex_unlock(philo->first_fork);
 	pthread_mutex_unlock(philo->second_fork);
-	pthread_mutex_lock(philo->eat_m_nbr);
-	philo->times_eaten++;
-	pthread_mutex_unlock(philo->eat_m_nbr);
 }
 
 void	sleeping(t_philo *philo)

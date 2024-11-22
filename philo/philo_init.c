@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:40 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/22 02:57:20 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 04:06:25 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	philos_init(t_philo *philo, t_data *data)
 		philo[i].data = data;
 		philo[i].philo_id = i + 1;
 		philo[i].times_eaten = 0;
-		philo[i].eating = 0;
 		philo[i].dead = &data->dead_flag;
 		philo[i].dead_lock = &data->dead_lock;
 		philo[i].write_lock = &data->write_lock;

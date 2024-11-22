@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 00:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/22 03:22:57 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 04:04:15 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,17 @@ int	all_ate(t_philo *philo)
 	while (++i < philo[0].data->philos_nbr)
 	{
 		pthread_mutex_lock(philo[i].meal_lock);
+		pthread_mutex_lock(philo[i].eat_m_nbr);
 		if (philo[i].times_eaten >= philo[i].data->meals_nbr)
 			finished++;
 		pthread_mutex_unlock(philo[i].meal_lock);
+		pthread_mutex_unlock(philo[i].eat_m_nbr);
 	}
-	if (finished == philo[i - 1].data->philos_nbr)
+	if (finished == philo[0].data->philos_nbr)
 	{
-		pthread_mutex_lock(philo->dead_lock);
+		pthread_mutex_lock(philo[0].dead_lock);
 		*philo->dead = 1;
-		pthread_mutex_unlock(philo->dead_lock);
+		pthread_mutex_unlock(philo[0].dead_lock);
 		return (1);
 	}
 	return (0);
