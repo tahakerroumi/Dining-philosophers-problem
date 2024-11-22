@@ -6,41 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:07:47 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/21 02:47:07 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 03:38:10 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	pick_fork(t_philo *philo)
-{
-	pthread_mutex_lock(philo->r_fork_id);
-	message_update("has taken a fork", philo);
-	pthread_mutex_lock(philo->l_fork_id);
-	message_update("has taken a fork", philo);
-	dining(philo);
-}
-
-void	dining(t_philo *philo)
-{
-    philo->eating = 1;
-    message_update("is eating", philo);
-    pthread_mutex_lock(philo->meal_lock);
-    philo->last_meal = current_moment();
-    philo->times_eaten++;
-    pthread_mutex_unlock(philo->meal_lock);
-    ft_myusleep(philo->data->eat_time, philo);
-    philo->eating = 0;
-    pthread_mutex_unlock(philo->r_fork_id);
-    pthread_mutex_unlock(philo->l_fork_id);
-}
-
-void	sleeping(t_philo *philo)
-{
-	message_update("is sleeping", philo);
-	ft_myusleep(philo->data->sleep_time, philo);
-	message_update("is thinking", philo);
-}
 
 void	onlyone(t_philo *philo)
 {
@@ -61,6 +31,46 @@ int	existing(t_philo *philo)
 	return (1);
 }
 
+void	dining(t_philo *philo)
+{
+	if (philo->l_fork_id > philo->r_fork_id)
+	{
+		philo->first_fork = philo->r_fork_id;
+		philo->second_fork = philo->l_fork_id;
+	}
+	else
+	{
+		philo->first_fork = philo->l_fork_id;
+		philo->second_fork = philo->r_fork_id;
+	}
+	pthread_mutex_lock(philo->first_fork);
+	message_update("has taken a fork", philo);
+	pthread_mutex_lock(philo->second_fork);
+	message_update("has taken a fork", philo);
+	message_update("is eating", philo);
+	pthread_mutex_lock(philo->meal_lock);
+	philo->last_meal = current_moment();
+	pthread_mutex_unlock(philo->meal_lock);
+	ft_myusleep(philo->data->eat_time, philo);
+	pthread_mutex_unlock(philo->first_fork);
+	pthread_mutex_unlock(philo->second_fork);
+	pthread_mutex_lock(philo->eat_m_nbr);
+	philo->times_eaten++;
+	pthread_mutex_unlock(philo->eat_m_nbr);
+}
+
+void	sleeping(t_philo *philo)
+{
+	message_update("is sleeping", philo);
+	ft_myusleep(philo->data->sleep_time, philo);
+}
+
+void	thinking(t_philo *philo)
+{
+	message_update("is thinking", philo);
+	ft_myusleep(1, philo);
+}
+
 void	*philo_routine(void *data)
 {
 	t_philo	*philo;
@@ -74,9 +84,9 @@ void	*philo_routine(void *data)
 		usleep(1000);
 	while (existing(philo))
 	{
-		pick_fork(philo);
 		dining(philo);
 		sleeping(philo);
+		thinking(philo);
 	}
 	return (data);
 }

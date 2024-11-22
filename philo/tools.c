@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:20:59 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/21 03:01:03 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 03:35:09 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_myusleep(size_t moment, t_philo *philo)
 	size_t	now;
 
 	now = current_moment();
-	while ((current_moment() - now < moment) && existing(philo))
-			usleep(250);
+	while (current_moment() - now < moment && existing(philo))
+			usleep(450);
 	return ;
 }
 
@@ -54,6 +54,8 @@ void	free_data(t_data *data)
 	pthread_mutex_destroy(&data->write_lock);
 	pthread_mutex_destroy(&data->meal_lock);
 	pthread_mutex_destroy(&data->dead_lock);
+	pthread_mutex_destroy(&data->eat_m_nbr);
+	pthread_mutex_destroy(&data->eat_meals);
 	while (++i < data->philos_nbr)
 		pthread_mutex_destroy(&data->forks[i]);
 }

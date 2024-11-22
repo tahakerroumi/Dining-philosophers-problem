@@ -6,19 +6,16 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 00:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/21 02:54:05 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 03:22:57 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	died_checker(t_philo *philo)
+int	died_checker(t_philo *philo, size_t timetodie)
 {
-	size_t	time;
-
 	pthread_mutex_lock(philo->meal_lock);
-	time = current_moment() - philo->last_meal;
-	if ((time >= (size_t)philo->data->die_time) && (philo->eating == 0))
+	if (current_moment() - philo->last_meal > timetodie)
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		return (1);
@@ -34,7 +31,7 @@ int	died(t_philo *philo)
 	i = -1;
 	while (++i < philo->data->philos_nbr)
 	{
-		if (died_checker(&philo[i]))
+		if (died_checker(&philo[i], philo->data->die_time))
 		{
 			message_update("died", &philo[i]);
 			pthread_mutex_lock(philo[i].dead_lock);

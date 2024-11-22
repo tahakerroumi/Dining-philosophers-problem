@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:40 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/21 01:32:54 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 02:57:20 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,12 @@ int	philos_init(t_philo *philo, t_data *data)
 		philo[i].dead_lock = &data->dead_lock;
 		philo[i].write_lock = &data->write_lock;
 		philo[i].meal_lock = &data->meal_lock;
+		philo[i].eat_m_nbr = &data->eat_m_nbr;
+		philo[i].eat_meals = &data->eat_meals;
 		philo[i].last_meal = current_moment();
 		philo[i].start_time = current_moment();
-		if (i ==  data->philos_nbr - 1)
-		{
-			philo[i].r_fork_id = &data->forks[(i + 1) % data->philos_nbr];
-			philo[i].l_fork_id = &data->forks[i];
-		}
-		else
-		{
-			philo[i].r_fork_id = &data->forks[i];
-			philo[i].l_fork_id = &data->forks[(i + 1) % data->philos_nbr];
-		}
+		philo[i].l_fork_id = &data->forks[(i + 1) % data->philos_nbr];
+		philo[i].r_fork_id = &data->forks[i];
 	}
 	return (0);
 }
@@ -67,6 +61,8 @@ void	mutex_init(t_data *data)
 	pthread_mutex_init(&data->write_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->dead_lock, NULL);
+	pthread_mutex_init(&data->eat_m_nbr, NULL);
+	pthread_mutex_init(&data->eat_meals, NULL);
 }
 
 t_philo	*initialisation(t_data *data, int ac, char **av)

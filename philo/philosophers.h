@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/21 02:51:58 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/22 03:34:37 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ struct	s_philo;
 
 typedef struct s_data
 {
+	pthread_mutex_t	eat_meals; //
+	pthread_mutex_t	eat_m_nbr;
 	int				philos_nbr;
 	int				die_time;
 	int				eat_time;
@@ -51,6 +53,10 @@ typedef struct s_philo
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*dead_lock;
+	pthread_mutex_t	*eat_meals;
+	pthread_mutex_t	*eat_m_nbr;
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
 	int				*dead;
 
 	t_data			*data;
@@ -68,12 +74,9 @@ void				ft_myusleep(size_t moment, t_philo *philo);
 size_t				current_moment(void);
 void				message_update(char *message, t_philo *philo);
 void				*philo_routine(void *data);
-// void				pick_fork(t_philo *philo);
 void				dining(t_philo *philo);
-// void				sleeping(t_philo *philo);
 void				free_data(t_data *data);
 int					existing(t_philo *philo);
-int					died_checker(t_philo *philo);
 int					died(t_philo *philo);
 int					all_ate(t_philo *philo);
 

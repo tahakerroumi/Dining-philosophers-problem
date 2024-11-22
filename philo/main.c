@@ -6,39 +6,26 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 12:28:08 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/21 03:15:13 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/21 21:36:36 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*monitor_routine(void *data)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)data;
-	while (1)
-	{
-		if (died(philo) || all_ate(philo))
-			break;
-	}
-	return (data);
-}
-
 void	global_routine(t_data *data)
 {
 	int			i;
-	pthread_t	monitor;
 
-	pthread_create(&monitor, NULL, monitor_routine, data->philosophe);
 	i = -1;
 	while (++i < data->philos_nbr)
 		pthread_create(&data->philosophe[i].thread_id, NULL, philo_routine,
 			&data->philosophe[i]);
+	while (1)
+		if (died(data->philosophe) || all_ate(data->philosophe))
+			break ;
 	i = -1;
 	while (++i < data->philos_nbr)
 		pthread_join(data->philosophe[i].thread_id, NULL);
-	pthread_join(monitor, NULL);
 	return ;
 }
 
