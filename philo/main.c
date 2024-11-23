@@ -14,7 +14,7 @@
 
 void	global_routine(t_data *data)
 {
-	int			i;
+	int	i;
 
 	i = -1;
 	while (++i < data->philos_nbr)

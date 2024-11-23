@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:07:47 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/23 02:28:42 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/23 02:49:24 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	onlyone(t_philo *philo)
 
 void	dining(t_philo *philo)
 {
-	if (philo->l_fork_id > philo->r_fork_id)
+	if (!(philo->philo_id == philo->data->philos_nbr))
 	{
 		philo->first_fork = philo->r_fork_id;
 		philo->second_fork = philo->l_fork_id;

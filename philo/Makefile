@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -lpthread
+CFLAGS = -Wall -Wextra -Werror
 CC = cc
 NAME = philo
 

@@ -26,7 +26,7 @@ void	ft_myusleep(size_t moment, t_philo *philo)
 
 	now = current_moment();
 	while (current_moment() - now < moment && existing(philo))
-			usleep(450);
+		usleep(450);
 	return ;
 }
 
