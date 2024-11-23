@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:07:47 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/23 02:49:24 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/23 03:42:03 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*philo_routine(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	if (!philo->data->philos_nbr)
+	if (!philo->data->philos_nbr || !philo->data->meals_nbr)
 		return (NULL);
 	if (philo->data->philos_nbr == 1)
 		return (onlyone(philo), NULL);
