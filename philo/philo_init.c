@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:40 by ta7ino            #+#    #+#             */
-/*   Updated: 2024/11/22 04:06:25 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/23 02:31:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ int	philos_init(t_philo *philo, t_data *data)
 		philo[i].dead = &data->dead_flag;
 		philo[i].dead_lock = &data->dead_lock;
 		philo[i].write_lock = &data->write_lock;
-		philo[i].meal_lock = &data->meal_lock;
-		philo[i].eat_m_nbr = &data->eat_m_nbr;
-		philo[i].eat_meals = &data->eat_meals;
+		philo[i].last_meal_lock = &data->meal_lock;
+		philo[i].times_eaten_lock = &data->times_eaten_lock;
 		philo[i].last_meal = current_moment();
 		philo[i].start_time = current_moment();
 		philo[i].l_fork_id = &data->forks[(i + 1) % data->philos_nbr];
@@ -48,6 +47,7 @@ void	fork_init(t_philo *philo, t_data *data)
 	if (!data->forks)
 	{
 		free(philo);
+		free_data(data);
 		return ;
 	}
 	i = -1;
@@ -60,15 +60,14 @@ void	mutex_init(t_data *data)
 	pthread_mutex_init(&data->write_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->dead_lock, NULL);
-	pthread_mutex_init(&data->eat_m_nbr, NULL);
-	pthread_mutex_init(&data->eat_meals, NULL);
+	pthread_mutex_init(&data->times_eaten_lock, NULL);
 }
 
 t_philo	*initialisation(t_data *data, int ac, char **av)
 {
 	t_philo	*philo;
 
-	data->philos_nbr = atoi(av[1]);
+	data->philos_nbr = ft_myatoi(av[1]);
 	data->die_time = ft_myatoi(av[2]);
 	data->eat_time = ft_myatoi(av[3]);
 	data->sleep_time = ft_myatoi(av[4]);

@@ -11,12 +11,12 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(DEBUG)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ)
 
 fclean: clean
-	rm -Rf $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all

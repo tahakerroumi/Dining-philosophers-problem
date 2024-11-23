@@ -6,21 +6,33 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 00:26:56 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/11/22 04:04:15 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/11/23 02:42:10 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+int	existing(t_philo *philo)
+{
+	pthread_mutex_lock(philo->dead_lock);
+	if (*philo->dead == 1)
+	{
+		pthread_mutex_unlock(philo->dead_lock);
+		return (0);
+	}
+	pthread_mutex_unlock(philo->dead_lock);
+	return (1);
+}
+
 int	died_checker(t_philo *philo, size_t timetodie)
 {
-	pthread_mutex_lock(philo->meal_lock);
+	pthread_mutex_lock(philo->last_meal_lock);
 	if (current_moment() - philo->last_meal > timetodie)
 	{
-		pthread_mutex_unlock(philo->meal_lock);
+		pthread_mutex_unlock(philo->last_meal_lock);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->meal_lock);
+	pthread_mutex_unlock(philo->last_meal_lock);
 	return (0);
 }
 
@@ -54,12 +66,10 @@ int	all_ate(t_philo *philo)
 	finished = 0;
 	while (++i < philo[0].data->philos_nbr)
 	{
-		pthread_mutex_lock(philo[i].meal_lock);
-		pthread_mutex_lock(philo[i].eat_m_nbr);
+		pthread_mutex_lock(philo[i].times_eaten_lock);
 		if (philo[i].times_eaten >= philo[i].data->meals_nbr)
 			finished++;
-		pthread_mutex_unlock(philo[i].meal_lock);
-		pthread_mutex_unlock(philo[i].eat_m_nbr);
+		pthread_mutex_unlock(philo[i].times_eaten_lock);
 	}
 	if (finished == philo[0].data->philos_nbr)
 	{
