@@ -1,19 +1,52 @@
-# | Philosophers 42 Project|
+# Dining Philosophers Problem
 
-# - Project Overview
-This project tackles the Dining Philosophers problem, a classic exercise in concurrency and synchronization, using threads and mutexes for the mandatory part, and processes and semaphores for the bonus part. It helps develop skills in multithreading, process management, and handling race conditions.
+## Overview
 
-# - Problem Description
-- Philosophers sit around a table, alternating between eating, thinking, and sleeping.
-- To eat, each philosopher needs two forks (one on the left, one on the right).
-- If a philosopher doesn’t eat within a certain time, they starve and the simulation ends.
-- The challenge is to manage resource sharing (forks) without deadlock or starvation.
+This project addresses the **Dining Philosophers Problem**, a classic synchronization challenge in concurrent programming. The problem demonstrates the complexities of managing shared resources (in this case, forks) among multiple threads (philosophers) without causing deadlocks or starvation.
 
-# - Mandatory Part
-- Implemented with threads and mutexes.
-- Each philosopher is a thread and forks are shared resources, protected by mutexes.
-- Input: number of philosophers, time limits (to eat, sleep, or die), and an optional stop condition (number of meals).
+## About the Solution
 
-# - Bonus Part
-- Implemented with processes and semaphores.
-- Philosophers are processes, and the number of available forks is controlled by a semaphore.
+I implemented the solution in **C**, using the following key concepts:
+
+- **Threads**: To simulate philosophers as concurrent processes.
+- **Mutexes**: To manage access to shared resources safely and prevent race conditions.
+- **Asymmetric Locking (Numbered Forks)**: A strategy to prevent deadlocks by ensuring consistent lock acquisition order.
+
+This project not only solved the synchronization issue but also deepened my understanding of **multithreading** and **concurrent programming**. 
+
+## What I Learned
+
+While working on this problem, I gained hands-on experience with:
+
+- **Thread management**:
+  - Creating and joining threads using `pthread_create` and `pthread_join`.
+  - Using thread-specific data structures for efficient communication.
+- **Synchronization primitives**:
+  - Initializing and using **mutexes** (`pthread_mutex_init`, `pthread_mutex_lock`, and `pthread_mutex_unlock`).
+  - Preventing race conditions while optimizing for performance.
+- **Deadlock prevention**:
+  - Understanding conditions that lead to deadlocks.
+  - Implementing algorithms like **Asymmetric Locking** to prevent them.
+- **Concurrency challenges**:
+  - Dealing with shared data and minimizing contention.
+  - Testing and debugging concurrent code.
+- **Problem-solving under constraints**:
+  - Designing a solution with minimal resource usage.
+  - Balancing fairness and efficiency among threads.
+
+## How It Works
+
+1. **Simulation**: Philosophers think and eat in cycles.
+2. **Fork Management**: Each philosopher must pick up two forks (mutexes) to eat, but they pick them up in a predefined order to avoid deadlocks.
+3. **Concurrency**: Multiple philosophers operate concurrently, but the use of mutexes ensures they do not interfere with each other.
+
+## Key Files
+
+- `dining_philosophers.c`: Contains the core implementation of the Dining Philosophers Problem.
+
+## Usage
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/dining-philosophers.git
+   cd dining-philosophers
