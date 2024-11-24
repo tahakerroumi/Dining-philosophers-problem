@@ -43,11 +43,12 @@ While working on this problem, I gained hands-on experience with:
 ## Usage
 
 1. Clone the repository:
-   ```bash
    git clone https://github.com/yourusername/dining-philosophers.git
    cd dining-philosophers
    cd philo
-   ```make to compile all the necessary files
-   ./philo "[number of philosophers]" "[time to die]" "[eating time]" "[sleeping time]" "[number of meals (optional)]"
+2. Compile the program using make
+   make
+3. run the program
+   ./philo [number of philosophers] [time to die] [eating time] [sleeping time] [number of meals (optional)]
 
 
