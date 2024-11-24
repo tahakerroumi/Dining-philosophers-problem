@@ -50,7 +50,7 @@ While working on this problem, I gained hands-on experience with:
 2. Compile the program using make
    ```bash
    make
-3. run the program
+3. Run the program
    ```bash
    ./philo [number of philosophers] [time to die] [eating time] [sleeping time] [number of meals (optional)]
 
