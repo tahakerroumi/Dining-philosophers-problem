@@ -36,13 +36,9 @@ While working on this problem, I gained hands-on experience with:
 
 ## How It Works
 
-1. **Simulation**: Philosophers think and eat in cycles.
+1. **Simulation**: Philosophers eat, sleep and think in cycles.
 2. **Fork Management**: Each philosopher must pick up two forks (mutexes) to eat, but they pick them up in a predefined order to avoid deadlocks.
 3. **Concurrency**: Multiple philosophers operate concurrently, but the use of mutexes ensures they do not interfere with each other.
-
-## Key Files
-
-- `dining_philosophers.c`: Contains the core implementation of the Dining Philosophers Problem.
 
 ## Usage
 
@@ -50,3 +46,8 @@ While working on this problem, I gained hands-on experience with:
    ```bash
    git clone https://github.com/yourusername/dining-philosophers.git
    cd dining-philosophers
+   cd philo
+   ```make to compile all the necessary files
+   ./philo "[number of philosophers]" "[time to die]" "[eating time]" "[sleeping time]" "[number of meals (optional)]"
+
+
